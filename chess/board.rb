@@ -10,10 +10,12 @@ class Board
         (0..7).each do |col|
             if filled_cols.include?(col)
                 @rows << Array.new(8){Piece.new}
+                # Piece.new won't be a comprehensive solution when we add different pieces
             else
                 @rows << Array.new(8)
             end
         end
+        
 
             
     end
