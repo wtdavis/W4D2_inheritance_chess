@@ -5,8 +5,17 @@ require_relative "./piece.rb"
 class Board
 
     def initialize
-        @rows = Array.new(8){Array.new(8)}
-        #@null_piece stuff 
+        @rows = []
+        filled_cols =  [0, 1, 6, 7]
+        (0..7).each do |col|
+            if filled_cols.include?(col)
+                @rows << Array.new(8){Piece.new}
+            else
+                @rows << Array.new(8)
+            end
+        end
+
+            
     end
 
 
@@ -34,7 +43,12 @@ class Board
         # eventually change this from nil to .empty? after pieces are initialized into array
         if self[start_pos] == nil
             raise 'position is empty'
+        elsif self[end_pos] != nil
+            raise "occupied"
         end
+
+        self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+
 
         # raise error if start_pos empty OR end_pos invalid
     end
