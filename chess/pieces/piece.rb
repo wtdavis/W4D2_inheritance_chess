@@ -3,7 +3,7 @@ require_relative "../board.rb"
 class Piece 
     attr_accessor :color, :board, :pos
 
-    def initialize(color, board, pos)
+    def initialize(color = nil, board = nil, pos = nil)
         @color = color
         @board = board
         @pos = pos

@@ -8,7 +8,6 @@ module Steppable
 
   def moves
     moves_arr = []
-    
     move_diffs.each do |dir|
       # example dir: [1, 1]
       dx, dy = dir

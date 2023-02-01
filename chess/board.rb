@@ -1,7 +1,7 @@
 #W4D2 board
 
-require_relative "./pieces/piece.rb"
-
+# require_relative "./pieces/piece.rb"
+require_relative "./pieces/null_piece.rb"
 class Board 
 
     # Potentially use a proc to initialize the pieces into the board in rows 0,1,6,7
@@ -9,18 +9,23 @@ class Board
         @rows = []
         filled_rows =  [0, 1, 6, 7]
         (0..7).each do |row|
+            subrow = []
             if filled_rows.include?(row) ## make a better board lol
-                @rows << Array.new(8){}
+                subrow = Array.new(8)
                 # Piece.new won't be a comprehensive solution when we add different pieces
             else
-                @rows << Array.new(8)
+                8.times do
+                    subrow << NullPiece.instance
+                end 
             end
+            @rows << subrow
+        end
 
             # row 0, 7  do #0, -1  = rook
             #  1, -2  = knight
             #  etc
-        end
-        
+    
+    
 
             
     end
