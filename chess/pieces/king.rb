@@ -1,5 +1,5 @@
-require 'piece'
-require '../modules/steppable.rb'
+require_relative '../modules/steppable.rb'
+require_relative 'piece'
 
 class King
 # unicode U+2654 white, U+265A black

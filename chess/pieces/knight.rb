@@ -5,8 +5,8 @@
 #   end
 
 # will find out more about colorize in the later sstages o fthe project
-require 'piece'
-require '../modules/steppable.rb'
+require_relative 'piece'
+require_relative '../modules/steppable.rb'
 
 
 class Knight

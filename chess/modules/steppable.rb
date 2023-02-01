@@ -29,7 +29,6 @@ module Steppable
       
       # need to call this from the piece subclass within the moves method
       # # helps us determine if the piece moves horizontally/vertically/both
-  end
 
   private
 

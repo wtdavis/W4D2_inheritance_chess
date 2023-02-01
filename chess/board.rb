@@ -2,6 +2,14 @@
 
 # require_relative "./pieces/piece.rb"
 require_relative "./pieces/null_piece.rb"
+require_relative "./pieces/bishop.rb"
+require_relative "./pieces/rook.rb"
+require_relative "./pieces/pawn.rb"
+require_relative "./pieces/king.rb"
+require_relative "./pieces/queen.rb"
+require_relative "./pieces/knight.rb"
+
+
 class Board 
 
     # Potentially use a proc to initialize the pieces into the board in rows 0,1,6,7
@@ -10,9 +18,16 @@ class Board
         filled_rows =  [0, 1, 6, 7]
         (0..7).each do |row|
             subrow = []
-            if filled_rows.include?(row) ## make a better board lol
-                subrow = Array.new(8)
-                # Piece.new won't be a comprehensive solution when we add different pieces
+            if filled_rows.include?(row)
+                col = -1
+                subrow << Rook.new('white', self, [row, col += 1])
+                subrow << Knight.new('white', self, [row, col += 1])
+                subrow << Bishop.new('white', self, [row, col += 1])
+                subrow << King.new('white', self, [row, col += 1])
+                subrow << Queen.new('white', self, [row, col += 1])
+                subrow << Bishop.new('white', self, [row, col += 1])
+                subrow << Knight.new('white', self, [row, col += 1])
+                subrow << Rook.new('white', self, [row, col += 1])
             else
                 8.times do
                     subrow << NullPiece.instance
@@ -53,13 +68,15 @@ class Board
         end
 
         # eventually change this from nil to .empty? after pieces are initialized into array
-        if self[start_pos] == nil
+        if self[start_pos].empty?
             raise 'position is empty'
-        elsif self[end_pos] != nil
+        elsif !self[end_pos].empty?
             raise "occupied"
         end
 
         self[start_pos], self[end_pos] = self[end_pos], self[start_pos]
+
+        self[end_pos].pos = end_pos
 
 
         # raise error if start_pos empty OR end_pos invalid
