@@ -4,6 +4,7 @@ require_relative "./piece.rb"
 
 class Board
 
+    # Potentially use a proc to initialize the pieces into the board in rows 0,1,6,7
     def initialize
         @rows = []
         filled_cols =  [0, 1, 6, 7]

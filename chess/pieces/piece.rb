@@ -8,14 +8,19 @@ class Piece
         @pos = pos
     end
 
+
+    # helps in rendering the board in the terminal
     def to_s
     end
 
+
+    #checks if the space we're on is occupied by a piece (returns a boolean)
+    #basically return true if piece is a Null Piece?
     def empty?
     end
 
+    # this method below is contingent on check/checkmate. Don't mess with it until much later
     def valid_moves
-        []
     end
 
     def pos=(val)
