@@ -31,8 +31,14 @@ module Slideable
   def moves
     moves_arr = []
     
-    move_dirs.each do ||
-      direction.each do |
+    move_dirs.each do |dir|
+      # example dir: [1, 1]
+      dx, dy = dir
+      moves_arr << grow_unblocked_move_in_dir(dx, dy)
+    end
+    moves_arr
+  end
+      
     
     # create array to collect moves
 
@@ -61,11 +67,15 @@ module Slideable
     current_pos = self.pos
     current_pos[0] += dx
     current_pos[1] += dy
+    
+    x, y = current_pos
 
-    while self.board[current_pos].empty?
+    while self.board[current_pos].empty? && valid_indices?(x, y)
       output_arr << current_pos
       current_pos[0] += dx
       current_pos[1] += dy
+
+      x, y = current_pos
     end
    
   end

@@ -18,7 +18,8 @@ class Piece
     #checks if the space we're on is occupied by a piece (returns a boolean)
     #basically return true if piece is a Null Piece?
     def empty?
-        true ### change to false later, and true for Nullpiece
+        return false
+        ### change to false later, and true for Nullpiece
     end
 
     # this method below is contingent on check/checkmate. Don't mess with it until much later
@@ -33,5 +34,9 @@ class Piece
         @symbol
     end
         
+    def valid_indices?(x, y)
+        return false if x < 0 || x > 7 || y < 0 || y > 7
+        return true
+    end
 
 end
