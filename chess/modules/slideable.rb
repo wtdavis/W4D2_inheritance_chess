@@ -13,11 +13,27 @@ module Slideable
     [0, -1] #down
   ].freeze
 
+    DIAGONAL_DIRS = [
+    [-1, -1], #SW
+    [-1, 1], #NW
+    [1, -1], #SE
+    [1, 1]   #NE
+  ].freeze
+
   def horizontal_dirs
     HORIZONTAL_DIRS
   end
 
+  def diagonal_dirs
+    DIAGONAL_DIRS
+  end
+
   def moves
+    moves_arr = []
+    
+    move_dirs.each do ||
+      direction.each do |
+    
     # create array to collect moves
 
     #iterate over each of the directions to get all of the valid moves for each piece
@@ -27,11 +43,10 @@ module Slideable
         # and add them to your moves array
         # (use the 'grow=unblocked_mvoes-in_dir helper method')
 
-      move_dirs
+      
       # need to call this from the piece subclass within the moves method
       # # helps us determine if the piece moves horizontally/vertically/both
   end
-
 
   private
 
@@ -42,12 +57,23 @@ module Slideable
 
   def grow_unblocked_move_in_dir(dx, dy)
     #keeps going in this direction and seeing if the move we want to attempt is valid
+    output_arr = []
+    current_pos = self.pos
+    current_pos[0] += dx
+    current_pos[1] += dy
 
-    # 
+    while self.board[current_pos].empty?
+      output_arr << current_pos
+      current_pos[0] += dx
+      current_pos[1] += dy
+    end
+   
   end
 
 
 
 
 
-  end
+  
+
+end

@@ -1,5 +1,6 @@
-class Piece 
+require_relative "../board.rb"
 
+class Piece 
     attr_accessor :color, :board, :pos
 
     def initialize(color, board, pos)
@@ -17,6 +18,7 @@ class Piece
     #checks if the space we're on is occupied by a piece (returns a boolean)
     #basically return true if piece is a Null Piece?
     def empty?
+        true ### change to false later, and true for Nullpiece
     end
 
     # this method below is contingent on check/checkmate. Don't mess with it until much later

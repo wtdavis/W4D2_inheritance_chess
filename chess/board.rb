@@ -1,20 +1,24 @@
 #W4D2 board
 
-require_relative "./piece.rb"
+require_relative "./pieces/piece.rb"
 
-class Board
+class Board 
 
     # Potentially use a proc to initialize the pieces into the board in rows 0,1,6,7
     def initialize
         @rows = []
-        filled_cols =  [0, 1, 6, 7]
-        (0..7).each do |col|
-            if filled_cols.include?(col)
-                @rows << Array.new(8){Piece.new}
+        filled_rows =  [0, 1, 6, 7]
+        (0..7).each do |row|
+            if filled_rows.include?(row) ## make a better board lol
+                @rows << Array.new(8){}
                 # Piece.new won't be a comprehensive solution when we add different pieces
             else
                 @rows << Array.new(8)
             end
+
+            # row 0, 7  do #0, -1  = rook
+            #  1, -2  = knight
+            #  etc
         end
         
 
