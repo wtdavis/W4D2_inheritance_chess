@@ -9,28 +9,40 @@ require_relative "./pieces/king.rb"
 require_relative "./pieces/queen.rb"
 require_relative "./pieces/knight.rb"
 
+require "colorize"  
 
 class Board 
 
     # Potentially use a proc to initialize the pieces into the board in rows 0,1,6,7
     def initialize
         @rows = []
-        filled_rows =  [0, 1, 6, 7]
+        filled_rows =  [0, 7]
+        pawn_rows = [1, 6]
         (0..7).each do |row|
+            if row < 4
+                color_chooser = "white"
+            else
+                color_chooser = "black"
+            end
             subrow = []
             if filled_rows.include?(row)
                 col = -1
-                subrow << Rook.new('white', self, [row, col += 1])
-                subrow << Knight.new('white', self, [row, col += 1])
-                subrow << Bishop.new('white', self, [row, col += 1])
-                subrow << King.new('white', self, [row, col += 1])
-                subrow << Queen.new('white', self, [row, col += 1])
-                subrow << Bishop.new('white', self, [row, col += 1])
-                subrow << Knight.new('white', self, [row, col += 1])
-                subrow << Rook.new('white', self, [row, col += 1])
+                subrow << Rook.new(color_chooser, self, [row, col += 1])
+                subrow << Knight.new(color_chooser, self, [row, col += 1])
+                subrow << Bishop.new(color_chooser, self, [row, col += 1])
+                subrow << King.new(color_chooser, self, [row, col += 1])
+                subrow << Queen.new(color_chooser, self, [row, col += 1])
+                subrow << Bishop.new(color_chooser, self, [row, col += 1])
+                subrow << Knight.new(color_chooser, self, [row, col += 1])
+                subrow << Rook.new(color_chooser, self, [row, col += 1])
+            elsif pawn_rows.include?(row)
+                (0..7).each do |col|
+                    subrow << Pawn.new(color_chooser, self, [row, col])
+                end
             else
                 8.times do
                     subrow << NullPiece.instance
+                    
                 end 
             end
             @rows << subrow
@@ -72,6 +84,10 @@ class Board
             raise 'position is empty'
         elsif !self[end_pos].empty?
             raise "occupied"
+        end
+
+        unless self[start_pos].moves.include?(end_pos)
+            raise "invalid move!"
         end
 
         self[start_pos], self[end_pos] = self[end_pos], self[start_pos]

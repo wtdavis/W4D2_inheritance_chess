@@ -9,8 +9,8 @@ require_relative 'piece'
 require_relative '../modules/steppable.rb'
 
 
-class Knight
-
+class Knight < Piece
+include Steppable
   def move_diffs
     output = []
     (-2..2).each do |x|

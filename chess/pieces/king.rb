@@ -1,7 +1,7 @@
 require_relative '../modules/steppable.rb'
 require_relative 'piece'
 
-class King
+class King < Piece
 # unicode U+2654 white, U+265A black
   include Steppable
 

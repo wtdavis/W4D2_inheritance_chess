@@ -7,10 +7,10 @@
 module Slideable
 
   HORIZONTAL_DIRS = [
-    [-1, 0], #left
-    [1, 0], #right
-    [0, 1], #up
-    [0, -1] #down
+    [-1, 0], #up
+    [1, 0], #down
+    [0, 1], #right
+    [0, -1] #left
   ].freeze
 
     DIAGONAL_DIRS = [
@@ -34,7 +34,8 @@ module Slideable
     move_dirs.each do |dir|
       # example dir: [1, 1]
       dx, dy = dir
-      moves_arr << grow_unblocked_move_in_dir(dx, dy)
+      p grow_unblocked_move_in_dir(dx, dy)
+      moves_arr += grow_unblocked_move_in_dir(dx, dy)
     end
     moves_arr
   end
@@ -63,20 +64,23 @@ module Slideable
   def grow_unblocked_move_in_dir(dx, dy)
     #keeps going in this direction and seeing if the move we want to attempt is valid
     output_arr = []
-    current_pos = self.pos
+    current_pos = self.pos.dup
     current_pos[0] += dx
     current_pos[1] += dy
     
     x, y = current_pos
-
-    while self.board[current_pos].empty? && valid_indices?(x, y)
-      output_arr << current_pos
+    # p x
+    # p y
+    # p self.board[current_pos].empty?
+    while valid_indices?(x, y) && self.board[current_pos].empty?
+      # p current_pos
+      output_arr << current_pos.dup
       current_pos[0] += dx
       current_pos[1] += dy
 
       x, y = current_pos
     end
-   
+    output_arr
   end
 
 
